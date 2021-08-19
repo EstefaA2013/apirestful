@@ -1,5 +1,6 @@
 package com.ead.apirestful.services.implementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +61,19 @@ public class UsersImpl implements IUsersService {
 
 	@Override
 	public void saveAll(List<UsersDTO> users) {
-		// TODO Auto-generated method stub
+		
+		List<Users> u = new ArrayList<>();
+		
+		for (UsersDTO user : users) {
+			
+			Users us = MHelpers.modelMapper().map(user, Users.class);
+		
+			u.add(us);
+		}
+		
+		this.usersRepository.saveAll(u);
+
+		
 		
 	}
 
