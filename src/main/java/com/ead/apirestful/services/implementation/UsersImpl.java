@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import com.ead.apirestful.dto.UsersDTO;
+import com.ead.apirestful.entities.Users;
 import com.ead.apirestful.repository.UsersRepository;
 import com.ead.apirestful.services.interfaces.IUsersService;
+import com.ead.apirestful.utils.MHelpers;
 
 @Component
 public class UsersImpl implements IUsersService {
@@ -18,8 +20,10 @@ public class UsersImpl implements IUsersService {
 	
 	@Override
 	public Page<UsersDTO> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Page<Users> users = this.usersRepository.findAll();
+
+		return users.map(this::convertToUsersDTO);
 	}
 
 	@Override
@@ -52,4 +56,7 @@ public class UsersImpl implements IUsersService {
 		
 	}
 
+	private UsersDTO convertToUsersDTO(final Users users) {
+	    return MHelpers.modelMapper().map(users, UsersDTO.class);
+	}
 }
