@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.ead.apirestful.dto.UserRequest;
 import com.ead.apirestful.dto.UsersDTO;
 import com.ead.apirestful.entities.Users;
 import com.ead.apirestful.repository.UsersRepository;
@@ -60,7 +62,7 @@ public class UsersImpl implements IUsersService {
 	}
 
 	@Override
-	public void save(UsersDTO user) {
+	public void save(UserRequest user) {
 
         Users users = MHelpers.modelMapper().map(user, Users.class);
         
@@ -68,11 +70,11 @@ public class UsersImpl implements IUsersService {
 	}
 
 	@Override
-	public void saveAll(List<UsersDTO> users) {
+	public void saveAll(List<UserRequest> users) {
 		
 		List<Users> u = new ArrayList<>();
 		
-		for (UsersDTO user : users) {
+		for (UserRequest user : users) {
 			
 			Users us = MHelpers.modelMapper().map(user, Users.class);
 		
