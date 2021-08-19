@@ -66,8 +66,8 @@ public class UsersImpl implements IUsersService {
 
 	@Override
 	public void deleteById(int userId) {
-		// TODO Auto-generated method stub
-		
+
+		this.usersRepository.deleteById(userId);
 	}
 
 	private UsersDTO convertToUsersDTO(final Users users) {
