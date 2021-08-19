@@ -13,9 +13,9 @@ public interface IUsersService {
 
 	Page<UsersDTO> findAll();
 
-	Optional<UsersDTO> findByUsername(String username);
+	UsersDTO findByUsername(String username);
 	
-	Optional<UsersDTO> findByUserId(int userId);
+	UsersDTO findByUserId(int userId);
 
 	void save(UsersDTO user);
 
