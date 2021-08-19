@@ -27,9 +27,15 @@ public class UsersImpl implements IUsersService {
 	}
 
 	@Override
-	public Optional<UsersDTO> findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsersDTO findByUsername(String username) {
+
+        Optional<Users> users = this.usersRepository.findByUsername(username);
+        
+        if(!users.isPresent()) {
+        	return null;
+        }
+        
+        return MHelpers.modelMapper().map(users.get(), UsersDTO.class);
 	}
 
 	@Override
