@@ -3,9 +3,7 @@ package com.ead.apirestful.services.implementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 import com.ead.apirestful.dto.UsersDTO;
 import com.ead.apirestful.entities.Users;
@@ -20,12 +18,22 @@ public class UsersImpl implements IUsersService {
 	private UsersRepository usersRepository;
 	
 	@Override
-	public Page<UsersDTO> findAll() {
+	public List<UsersDTO> findAll() {
 		
-		Page<Users> users = this.usersRepository.findAll();
+        List<UsersDTO> dto = new ArrayList<>();
+        
+        Iterable<Users> users = this.usersRepository.findAll();
 
-		return users.map(this::convertToUsersDTO);
-	}
+        for (Users user : users) {
+    
+        	UsersDTO usersDTO = MHelpers.modelMapper().map(user, UsersDTO.class);
+    
+        	dto.add(usersDTO);
+        	
+        }            
+        
+        return dto;
+}
 
 	@Override
 	public UsersDTO findByUsername(String username) {
