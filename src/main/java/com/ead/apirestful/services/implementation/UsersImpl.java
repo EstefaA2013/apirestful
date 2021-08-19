@@ -52,8 +52,10 @@ public class UsersImpl implements IUsersService {
 
 	@Override
 	public void save(UsersDTO user) {
-		// TODO Auto-generated method stub
-		
+
+        Users users = MHelpers.modelMapper().map(user, Users.class);
+        
+        this.usersRepository.save(users);
 	}
 
 	@Override
