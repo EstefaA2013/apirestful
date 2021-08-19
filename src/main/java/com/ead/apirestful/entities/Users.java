@@ -1,8 +1,7 @@
 package com.ead.apirestful.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +18,10 @@ import lombok.Data;
 @Table(name = "users")
 public class Users implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "user_id")
 	private int id;
@@ -32,19 +35,19 @@ public class Users implements Serializable {
 	private String password;
 	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
-	private LocalDateTime createdAt;
+	private Date createdAt;
 	@Column(name = "updated_at")
 	@Temporal(TemporalType.TIMESTAMP)
-	private LocalDateTime updatedAt;
+	private Date updatedAt;
 	
 	@PrePersist
 	public void prePersist() {
-		this.createdAt = LocalDateTime.now();
+		this.createdAt = new Date();
 	}
 	
 	@PreUpdate
 	public void preUpdate() {
-		this.updatedAt = LocalDateTime.now();
+		this.updatedAt = new Date();
 	}
 
 }
