@@ -3,6 +3,7 @@ package com.ead.apirestful.services.interfaces;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import com.ead.apirestful.dto.UserRequest;
 import com.ead.apirestful.dto.UsersDTO;
 
 @Service
@@ -14,9 +15,9 @@ public interface IUsersService {
 	
 	UsersDTO findByUserId(int userId);
 
-	void save(UsersDTO user);
+	void save(UserRequest user);
 
-	void saveAll(List<UsersDTO> users);
+	void saveAll(List<UserRequest> users);
 
 	void deleteById(int userId);
 }
