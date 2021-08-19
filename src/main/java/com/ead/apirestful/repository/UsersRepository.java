@@ -15,6 +15,4 @@ public interface UsersRepository extends CrudRepository<Users, Integer> {
 	@Transactional(readOnly = true)
 	Optional<Users> findByUsername(String username);
 	
-	@Override
-	Page<Users> findAll();
 }
