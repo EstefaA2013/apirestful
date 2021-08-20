@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ead.apirestful.dto.UserRequest;
 import com.ead.apirestful.services.interfaces.IUsersService;
+import com.ead.apirestful.utils.exceptions.ApiUnprocessableEntity;
+import com.ead.apirestful.validator.UserValidatorImpl;
 
 @CrossOrigin("*")
 @RestController
@@ -21,6 +23,9 @@ public class ApiController {
 	
 	@Autowired
 	private IUsersService usersService;
+	
+	@Autowired
+	private UserValidatorImpl userValidator;
 	
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> index() {
@@ -35,10 +40,13 @@ public class ApiController {
 	}
 	
 	@PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> saveUser(@RequestBody UserRequest request)
+	public ResponseEntity<Object> saveUser(@RequestBody UserRequest request) throws ApiUnprocessableEntity
 	{
-	
+		
+	    this.userValidator.validator(request);
+	    
 		this.usersService.save(request);
+		
 		return ResponseEntity.ok(Boolean.TRUE);
 		
 	}
