@@ -11,8 +11,8 @@ import com.ead.apirestful.dto.UsersDTO;
 import com.ead.apirestful.entities.Users;
 import com.ead.apirestful.repository.UsersRepository;
 import com.ead.apirestful.services.interfaces.IUsersService;
-import com.ead.apirestful.utils.BCrypt;
-import com.ead.apirestful.utils.MHelpers;
+import com.ead.apirestful.utils.hash.BCrypt;
+import com.ead.apirestful.utils.helpers.MHelpers;
 
 @Component
 public class UsersImpl implements IUsersService {
@@ -70,6 +70,22 @@ public class UsersImpl implements IUsersService {
         users.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         
         this.usersRepository.save(users);
+	}
+	
+	@Override
+	public void update(UserRequest request, int userId) {
+		Optional<Users> users = this.usersRepository.findById(userId);
+		
+		Users user = users.get();
+		user.setFirstname(request.getFirstname());
+		user.setLastname(request.getLastname());
+		user.setUsername(request.getUsername());
+		
+		if(!request.getPassword().isEmpty()) {
+		    user.setPassword(BCrypt.hashpw(request.getPassword(), BCrypt.gensalt()));
+		}
+		
+		this.usersRepository.save(user);
 	}
 
 	@Override
