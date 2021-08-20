@@ -11,6 +11,7 @@ import com.ead.apirestful.dto.UsersDTO;
 import com.ead.apirestful.entities.Users;
 import com.ead.apirestful.repository.UsersRepository;
 import com.ead.apirestful.services.interfaces.IUsersService;
+import com.ead.apirestful.utils.BCrypt;
 import com.ead.apirestful.utils.MHelpers;
 
 @Component
@@ -65,6 +66,8 @@ public class UsersImpl implements IUsersService {
 	public void save(UserRequest user) {
 
         Users users = MHelpers.modelMapper().map(user, Users.class);
+        
+        users.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         
         this.usersRepository.save(users);
 	}
