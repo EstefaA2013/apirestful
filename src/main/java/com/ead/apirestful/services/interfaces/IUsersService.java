@@ -14,8 +14,10 @@ public interface IUsersService {
 	UsersDTO findByUsername(String username);
 	
 	UsersDTO findByUserId(int userId);
-
+	
 	void save(UserRequest user);
+	
+	void update(UserRequest user, int userId);
 
 	void saveAll(List<UserRequest> users);
 
