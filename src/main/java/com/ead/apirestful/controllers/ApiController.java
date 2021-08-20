@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,13 +41,20 @@ public class ApiController {
 	}
 	
 	@PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> saveUser(@RequestBody UserRequest request) throws ApiUnprocessableEntity
-	{
+	public ResponseEntity<Object> saveUser(@RequestBody UserRequest request) throws ApiUnprocessableEntity {
 		
 	    this.userValidator.validator(request);
 	    
 		this.usersService.save(request);
 		
+		return ResponseEntity.ok(Boolean.TRUE);
+		
+	}
+	
+	@DeleteMapping(value = "/{userId}/delete")
+	public ResponseEntity<Object> deleteUser(@PathVariable int userId) {
+		
+		this.usersService.deleteById(userId);
 		return ResponseEntity.ok(Boolean.TRUE);
 		
 	}
