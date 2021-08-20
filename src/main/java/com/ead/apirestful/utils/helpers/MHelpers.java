@@ -1,4 +1,4 @@
-package com.ead.apirestful.utils;
+package com.ead.apirestful.utils.helpers;
 
 import org.modelmapper.ModelMapper;
 

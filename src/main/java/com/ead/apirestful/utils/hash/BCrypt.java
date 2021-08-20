@@ -1,4 +1,4 @@
-package com.ead.apirestful.utils;
+package com.ead.apirestful.utils.hash;
 
 
 import java.io.UnsupportedEncodingException;
