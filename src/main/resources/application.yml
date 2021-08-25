@@ -1,5 +1,5 @@
-server:  error:    whitelabel:      enabled: false
-  port: 8180
+server:  error:    whitelabel:      enabled: false    include-stacktrace: never
+  port: 8180ead: jwt:  security:   enabled: true  timezone: "America/Bogota"  issuer: "www.programacionfacil.net"  token:    auth:     path: "/v1.0/oauth/client_credential/accesstoken"   secret: "suscribete si ves este mensaje"   expires-in: 3600 #seconds   excluded:   path: "/v1.0/multi/v1.0/otraexclusion"
 # Configuracion de conexion a la base de datos MySQL
 
 spring:  datasource:    url: jdbc:mysql://localhost:3306/apirestful_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC    username: root    password:     driver-class-name: com.mysql.cj.jdbc.Driver  jpa:    database-platform: org.hibernate.dialect.MySQL57Dialect    hibernate:      ddl-auto: none  
