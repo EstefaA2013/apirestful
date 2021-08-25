@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ead.apirestful.services.interfaces.AuthService;
+import com.ead.apirestful.utils.exceptions.ApiUnaucthorizazed;
+import com.ead.apirestful.validator.AuthValidator;
 
 @RestController
 @RequestMapping(path = "v1.0")
@@ -19,8 +21,13 @@ public class AuthController {
 	@Autowired
 	private AuthService authService;
 	
+	@Autowired 
+	private AuthValidator validator; 
+	
 	@PostMapping(path = "oauth/client_credential/accesstoken",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> login(@RequestBody MultiValueMap<String, String>paraMap,@RequestParam("grant_type")String grantType) {
+	public ResponseEntity<Object> login(@RequestBody MultiValueMap<String, String>paraMap,@RequestParam("grant_type")String grantType) throws ApiUnaucthorizazed {
+		
+		validator.Validate(paraMap, grantType);
 		
 		return ResponseEntity.ok(authService.login(paraMap.getFirst("client_id"), paraMap.getFirst("client_secret")));
 	}
