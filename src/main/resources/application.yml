@@ -1,4 +1,4 @@
-server:  error:    whitelabel:      enabled: false    include-stacktrace: never
+server:  error:    whitelabel:      enabled: true    include-stacktrace: never
   port: 8180ead: jwt:  security:   enabled: true  timezone: "America/Bogota"  issuer: "www.programacionfacil.net"  token:    auth:     path: "/v1.0/oauth/client_credential/accesstoken"   secret: "suscribete si ves este mensaje"   expires-in: 3600 #seconds   excluded:   path: "/v1.0/multi/v1.0/otraexclusion"   
 # Configuracion de conexion a la base de datos MySQL
 
