@@ -61,6 +61,13 @@ public class JwtIO {
 		return result;
 	}
 	
+	public String getPayload(String encodedJWT) {
+
+		JWT jwt = jwt(encodedJWT);
+
+		return jwt.subject;
+	}
+	
 	private JWT jwt(String encodedJWT) {
 
 		Verifier verifier = HMACVerifier.newVerifier(SECRET);
